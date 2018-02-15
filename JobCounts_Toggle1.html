@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Change a map's style</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+    #menu {
+        position: absolute;
+        background: #fff;
+        padding: 10px;
+        font-family: 'Open Sans', sans-serif;
+    }
+</style>
+
+<div id='map'></div>
+<div id='menu'>
+    <input id='cjdnl2yyf2ljk2ro17c691x59' type='radio' name='rtoggle' value='cjdnl2yyf2ljk2ro17c691x59' checked='checked'>
+    <label for='cjdnl2yyf2ljk2ro17c691x59'>Job Counts - Private Sector 2014</label>
+    <input id='cjdnlbo1k01bl2sqdviyyzw1c' type='radio' name='rtoggle' value='cjdnlbo1k01bl2sqdviyyzw1c'>
+    <label for='cjdnlbo1k01bl2sqdviyyzw1c'>Job Counts - All 2015 Census</label>
+</div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidmNnaW1hcGJveCIsImEiOiJjamRnNmkwdTIwZjY4MnFvMGF0N2JwOGU1In0.tdLVOnx8wtNT7LNOo6SCDg';
+var map = new mapboxgl.Map({
+    style: 'mapbox://styles/vcgimapbox/cjdnl2yyf2ljk2ro17c691x59',
+    center: [-72.5705,43.543],
+    zoom: 8.5,
+    pitch: 45,
+    bearing: -17.6,
+    hash: true,
+    container: 'map'
+});
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+
+var layerList = document.getElementById('menu');
+var inputs = layerList.getElementsByTagName('input');
+
+function switchLayer(layer) {
+    var layerId = layer.target.id;
+    map.setStyle('mapbox://styles/vcgimapbox/' + layerId);
+}
+
+for (var i = 0; i < inputs.length; i++) {
+    inputs[i].onclick = switchLayer;
+}
+</script>
+
+</body>
+</html>
